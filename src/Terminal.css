@@ -100,6 +100,10 @@
   color: #a8a8a8;
 }
 
+.terminal-line.colored {
+  color: #a8a8a8;
+}
+
 .terminal-line.banner {
   color: #4ec9b0;
   font-weight: bold;

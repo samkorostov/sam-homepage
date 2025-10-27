@@ -67,6 +67,39 @@ const Terminal = () => {
     setHistory(prev => [...prev, { type, content: output }]);
   };
 
+  // Helper function to format colored text
+  const colorize = (text, color = 'cyan') => {
+    return `[${color.toUpperCase()}]${text}[/${color.toUpperCase()}]`;
+  };
+
+  // Parse colored text markers and convert to styled spans
+  const parseColoredText = (text) => {
+    const colorMap = {
+      'CYAN': '#4ec9b0',
+      'GREEN': '#4ec9b0',
+      'BLUE': '#4ec9b0',
+      'YELLOW': '#dcdcaa',
+      'MAGENTA': '#c586c0',
+      'ORANGE': '#ff8c69',
+      'CORAL': '#ff6b6b',
+      'PEACH': '#ce9178',
+      'SALMON': '#fa8072',
+      'HOTPINK': '#ff5588',  // Lighter, more red-toned pink for dark background
+      'LIGHTPINK': '#ff66b2',  // Lighter pink
+      'LIGHTERPINK': '#ff80bf',  // Even lighter pink
+      'PASTELPINK': '#ff99cc',  // Very light/pastel pink
+      'BRIGHTORANGE': '#ff8000',  // Bright orange
+    };
+
+    let result = text;
+    Object.entries(colorMap).forEach(([colorName, colorCode]) => {
+      const regex = new RegExp(`\\[${colorName}\\](.*?)\\[\\/${colorName}\\]`, 'g');
+      result = result.replace(regex, `<span style="color: ${colorCode}; font-weight: bold;">$1</span>`);
+    });
+
+    return result;
+  };
+
   const handleCommand = (cmd) => {
     const trimmedCmd = cmd.trim().toLowerCase();
 
@@ -129,20 +162,30 @@ Tip: Use Tab for autocomplete and Arrow keys for command history!
 
   const showAbout = () => {
     const { about } = config;
+    const bannerWidth = 60;
+    const banner = '━'.repeat(bannerWidth);
+    const padding = Math.floor((bannerWidth - about.greeting.length) / 2);
+    const centeredTitle = ' '.repeat(padding) + colorize(about.greeting, 'hotpink');
     const output = `
-${about.greeting}
-${'='.repeat(about.greeting.length)}
+${banner}
+${centeredTitle}
+${banner}
 
 ${about.description}
 `;
-    addToHistory(output);
+    addToHistory(output, 'colored');
   };
 
   const showExperience = () => {
-    let output = '\nWork Experience\n' + '='.repeat(15) + '\n\n';
+    const title = 'Work Experience';
+    const bannerWidth = 60;
+    const banner = '━'.repeat(bannerWidth);
+    const padding = Math.floor((bannerWidth - title.length) / 2);
+    const centeredTitle = ' '.repeat(padding) + colorize(title, 'hotpink');
+    let output = '\n' + banner + '\n' + centeredTitle + '\n' + banner + '\n\n';
 
     config.experience.forEach((exp, index) => {
-      output += `${exp.title} @ ${exp.company}\n`;
+      output += colorize(`${exp.title}`, 'brightorange') + ` @ ${exp.company}\n`;
       output += `${exp.period}\n\n`;
       exp.description.forEach(item => {
         output += `  • ${item}\n`;
@@ -150,14 +193,19 @@ ${about.description}
       if (index < config.experience.length - 1) output += '\n';
     });
 
-    addToHistory(output);
+    addToHistory(output, 'colored');
   };
 
   const showProjects = () => {
-    let output = '\nProjects\n' + '='.repeat(8) + '\n\n';
+    const title = 'Projects';
+    const bannerWidth = 60;
+    const banner = '━'.repeat(bannerWidth);
+    const padding = Math.floor((bannerWidth - title.length) / 2);
+    const centeredTitle = ' '.repeat(padding) + colorize(title, 'hotpink');
+    let output = '\n' + banner + '\n' + centeredTitle + '\n' + banner + '\n\n';
 
     config.projects.forEach((project, index) => {
-      output += `${project.name}\n`;
+      output += colorize(project.name, 'brightorange') + '\n';
       if (project.period) output += `${project.period}\n`;
       output += `${project.description}\n`;
       output += `Technologies: ${project.technologies.join(', ')}\n`;
@@ -165,35 +213,46 @@ ${about.description}
       if (index < config.projects.length - 1) output += '\n';
     });
 
-    addToHistory(output);
+    addToHistory(output, 'colored');
   };
 
   const showSkills = () => {
     const { skills } = config;
-    let output = '\nTechnical Skills\n' + '='.repeat(16) + '\n\n';
+    const title = 'Technical Skills';
+    const bannerWidth = 60;
+    const banner = '━'.repeat(bannerWidth);
+    const padding = Math.floor((bannerWidth - title.length) / 2);
+    const centeredTitle = ' '.repeat(padding) + colorize(title, 'hotpink');
+    let output = '\n' + banner + '\n' + centeredTitle + '\n' + banner + '\n\n';
 
-    output += 'Programming Languages:\n  ' + skills.languages.join(', ') + '\n\n';
-    output += 'ML & Data Science:\n  ' + skills.ml_data_science.join(', ') + '\n\n';
-    output += 'Cloud & Backend:\n  ' + skills.cloud_backend.join(', ') + '\n\n';
-    output += 'Hardware:\n  ' + skills.hardware.join(', ') + '\n\n';
-    output += 'Interests:\n  ' + skills.interests.join(', ') + '\n';
+    output += colorize('Programming Languages:', 'brightorange') + '\n  ' + skills.languages.join(', ') + '\n\n';
+    output += colorize('ML & Data Science:', 'brightorange') + '\n  ' + skills.ml_data_science.join(', ') + '\n\n';
+    output += colorize('Cloud & Backend:', 'brightorange') + '\n  ' + skills.cloud_backend.join(', ') + '\n\n';
+    output += colorize('Hardware:', 'brightorange') + '\n  ' + skills.hardware.join(', ') + '\n\n';
+    output += colorize('Interests:', 'brightorange') + '\n  ' + skills.interests.join(', ') + '\n';
 
-    addToHistory(output);
+    addToHistory(output, 'colored');
   };
 
   const showContact = () => {
     const { personal } = config;
+    const title = 'Get in Touch';
+    const bannerWidth = 60;
+    const banner = '━'.repeat(bannerWidth);
+    const padding = Math.floor((bannerWidth - title.length) / 2);
+    const centeredTitle = ' '.repeat(padding) + colorize(title, 'hotpink');
     const output = `
-Get in Touch
-${'='.repeat(12)}
+${banner}
+${centeredTitle}
+${banner}
 
-Email:    ${personal.email}
-GitHub:   ${personal.github}
-LinkedIn: ${personal.linkedin}
+${colorize('Email:', 'brightorange')}    ${personal.email}
+${colorize('GitHub:', 'brightorange')}   ${personal.github}
+${colorize('LinkedIn:', 'brightorange')} ${personal.linkedin}
 
 Feel free to reach out!
 `;
-    addToHistory(output);
+    addToHistory(output, 'colored');
   };
 
   const getPrompt = () => {
@@ -259,8 +318,8 @@ Feel free to reach out!
       <div className="terminal-body" ref={terminalRef}>
         {history.map((item, index) => (
           <div key={index} className={`terminal-line ${item.type}`}>
-            {item.type === 'banner' ? (
-              <pre>{item.content}</pre>
+            {item.type === 'colored' ? (
+              <pre dangerouslySetInnerHTML={{ __html: parseColoredText(item.content) }} />
             ) : (
               <pre>{item.content}</pre>
             )}
