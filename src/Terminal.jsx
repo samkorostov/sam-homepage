@@ -20,7 +20,7 @@ const Terminal = () => {
     if (hasLoadedRef.current) return; // Prevent double loading in StrictMode
     hasLoadedRef.current = true;
 
-    fetch('/config.yaml')
+    fetch(`${import.meta.env.BASE_URL}config.yaml`)
       .then(res => res.text())
       .then(text => {
         const data = yaml.load(text);
