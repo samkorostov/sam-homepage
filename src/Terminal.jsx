@@ -72,6 +72,9 @@ const Terminal = () => {
 
     if (!trimmedCmd) return;
 
+    // Clear previous output before showing new command
+    setHistory([]);
+
     // Add command to history
     addToHistory(`${getPrompt()}${cmd}`, 'command');
     setCommandHistory(prev => [...prev, cmd]);
