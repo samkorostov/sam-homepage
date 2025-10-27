@@ -1,16 +1,97 @@
-# React + Vite
+# Terminal Portfolio - Sam Korostov
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive, Mac terminal-themed portfolio website built with React and Vite.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Interactive terminal interface with command-line navigation
+- Mac terminal styling with traffic light buttons
+- Command history (arrow keys ↑/↓)
+- Tab autocomplete
+- ASCII art banner
+- Fully configurable via YAML file
 
-## React Compiler
+## Available Commands
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `about` - Learn more about me
+- `experience` - View work experience
+- `projects` - See projects
+- `skills` - Check out technical skills
+- `contact` - Get in touch
+- `clear` - Clear the terminal
+- `help` - Show available commands
 
-## Expanding the ESLint configuration
+## Development
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Install dependencies
+```bash
+npm install
+```
+
+### Run development server
+```bash
+npm run dev
+```
+
+### Build for production
+```bash
+npm run build
+```
+
+### Preview production build
+```bash
+npm run preview
+```
+
+## Configuration
+
+Edit `config.yaml` to customize your portfolio content:
+- Personal information
+- About section
+- Work experience
+- Projects
+- Technical skills
+
+After editing `config.yaml`, copy it to the public folder:
+```bash
+cp config.yaml public/config.yaml
+```
+
+## Deployment to GitHub Pages
+
+This project is configured with GitHub Actions for automatic deployment.
+
+### Setup Steps:
+
+1. **Create a GitHub repository** and push this code
+
+2. **Enable GitHub Pages**:
+   - Go to repository Settings → Pages
+   - Under "Build and deployment", select "GitHub Actions" as the source
+
+3. **Update base path** (if needed):
+   - If deploying to `username.github.io` → set `base: '/'` in `vite.config.js`
+   - If deploying to `username.github.io/repo-name` → set `base: '/repo-name/'` in `vite.config.js`
+
+4. **Push to main branch**:
+   - The GitHub Action will automatically build and deploy your site
+   - Your site will be available at `https://username.github.io/repo-name/`
+
+### Manual Deployment:
+
+```bash
+npm run build
+# Upload contents of dist/ folder to your hosting provider
+```
+
+## Tech Stack
+
+- React 19
+- Vite 7
+- JavaScript
+- CSS3
+- js-yaml for config parsing
+
+## License
+
+MIT
