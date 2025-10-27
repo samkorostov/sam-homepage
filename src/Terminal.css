@@ -1,0 +1,158 @@
+.terminal-container {
+  width: 90vw;
+  max-width: 1200px;
+  height: 85vh;
+  margin: 50px auto;
+  background: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-header {
+  background: #323232;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #4a4a4a;
+  position: relative;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
+  z-index: 1;
+}
+
+.btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.btn.close {
+  background: #ff5f57;
+}
+
+.btn.minimize {
+  background: #ffbd2e;
+}
+
+.btn.maximize {
+  background: #28ca42;
+}
+
+.terminal-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #a0a0a0;
+  font-size: 13px;
+}
+
+.terminal-body {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 5px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+}
+
+.terminal-line {
+  margin-bottom: 0;
+}
+
+.terminal-line pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: inherit;
+}
+
+.terminal-line.command {
+  color: #d4d4d4;
+}
+
+.terminal-line.output {
+  color: #a8a8a8;
+}
+
+.terminal-line.banner {
+  color: #4ec9b0;
+  font-weight: bold;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.terminal-prompt {
+  color: #4ec9b0;
+  margin-right: 8px;
+  user-select: none;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #d4d4d4;
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-size: 14px;
+  outline: none;
+  caret-color: #4ec9b0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .terminal-container {
+    width: 95vw;
+    height: 90vh;
+    margin: 20px auto;
+  }
+
+  .terminal-body {
+    padding: 15px;
+    font-size: 12px;
+  }
+
+  .terminal-input {
+    font-size: 12px;
+  }
+}
+
+/* Selection color */
+::selection {
+  background: #264f78;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: #264f78;
+  color: #ffffff;
+}
