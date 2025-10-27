@@ -15,7 +15,9 @@ about:
     I'm an Electrical & Computer Engineering student at the University of Washington Seattle,
     graduating in June 2026 with a 3.75 cumulative GPA (3.8 departmental).
 
-    I'm passionate about building scalable systems, machine learning, and computer architecture.
+    I'm passionate about cloud infrastructure, building scalable systems, machine learning, and
+    computer architecture.
+
     Currently serving as Lead Teaching Assistant for CSE12X at the Paul G. Allen School of
     Computer Science & Engineering, where I mentor students and coordinate teaching teams.
 
@@ -64,7 +66,6 @@ skills:
     - "Java"
     - "Python"
     - "TypeScript"
-    - "OCaml"
     - "C/C++"
 
   ml_data_science:
@@ -80,6 +81,7 @@ skills:
     - "AWS CDK"
     - "FastAPI"
     - "Node.js"
+    - "Spring Boot"
 
   hardware:
     - "SystemVerilog"
